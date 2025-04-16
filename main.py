@@ -32,7 +32,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle
 
 # Build and train model
 model = build_lstm_model(input_shape=(X.shape[1], X.shape[2]))
-history = model.fit(X_train, y_train, epochs=30, batch_size=16, validation_split=0.2)
+history = model.fit(X_train, y_train, epochs=80, batch_size=16, validation_split=0.2)
 
 # Predict
 y_pred = model.predict(X_test)
@@ -45,6 +45,16 @@ plt.plot(y_pred, label='Predicted')
 plt.title('N₂O Emission Prediction')
 plt.xlabel('Days')
 plt.ylabel('Normalized Emissions')
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+plt.figure(figsize=(10, 5))
+plt.plot(history.history['loss'], label='Training Loss')
+plt.plot(history.history['val_loss'], label='Validation Loss')
+plt.title('Loss Curves')
+plt.xlabel('Epochs')
+plt.ylabel('Loss')
 plt.legend()
 plt.tight_layout()
 plt.show()
